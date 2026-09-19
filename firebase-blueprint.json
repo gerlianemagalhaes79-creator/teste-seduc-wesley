@@ -1,0 +1,126 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "type": "object",
+      "description": "User profile with study settings, gamification state and preferences",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "specialty": { "type": "string" },
+        "hoursPerDay": { "type": "number" },
+        "studyDaysPerWeek": { "type": "number" },
+        "examDate": { "type": "string" },
+        "targetScore": { "type": "number" },
+        "xp": { "type": "number" },
+        "level": { "type": "number" },
+        "streak": { "type": "number" },
+        "lastActiveDate": { "type": "string" },
+        "streakFreezeAvailable": { "type": "number" },
+        "totalStudyMinutes": { "type": "number" },
+        "customNotesCount": { "type": "number" }
+      },
+      "required": ["specialty", "xp", "level"]
+    },
+    "StudyTopic": {
+      "title": "StudyTopic",
+      "type": "object",
+      "description": "Syllabus topic with progress and notes",
+      "properties": {
+        "id": { "type": "string" },
+        "moduleId": { "type": "string" },
+        "moduleName": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "isCompleted": { "type": "boolean" },
+        "isDelayed": { "type": "boolean" },
+        "scheduledDayOfWeek": { "type": "number" },
+        "notes": { "type": "string" }
+      },
+      "required": ["id", "title"]
+    },
+    "UserAnswerRecord": {
+      "title": "UserAnswerRecord",
+      "type": "object",
+      "description": "User response to a question",
+      "properties": {
+        "questionId": { "type": "string" },
+        "selectedOptionId": { "type": "string" },
+        "isCorrect": { "type": "boolean" },
+        "timestamp": { "type": "string" },
+        "timeSpentSeconds": { "type": "number" },
+        "topic": { "type": "string" },
+        "discipline": { "type": "string" }
+      },
+      "required": ["questionId", "selectedOptionId", "isCorrect"]
+    },
+    "SimuladoSession": {
+      "title": "SimuladoSession",
+      "type": "object",
+      "description": "Completed mock exam session",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "specialty": { "type": "string" },
+        "date": { "type": "string" },
+        "totalQuestions": { "type": "number" },
+        "correctCount": { "type": "number" },
+        "wrongCount": { "type": "number" },
+        "scorePercentage": { "type": "number" },
+        "timeSpentSeconds": { "type": "number" },
+        "mode": { "type": "string" }
+      },
+      "required": ["id", "scorePercentage"]
+    },
+    "Question": {
+      "title": "Question",
+      "type": "object",
+      "description": "FUNECE exam or AI generated question",
+      "properties": {
+        "id": { "type": "string" },
+        "discipline": { "type": "string" },
+        "topic": { "type": "string" },
+        "subtopic": { "type": "string" },
+        "statement": { "type": "string" },
+        "correctOptionId": { "type": "string" },
+        "explanation": { "type": "string" },
+        "banca": { "type": "string" }
+      },
+      "required": ["id", "statement", "correctOptionId"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Individual candidate profile"
+    },
+    "/users/{userId}/topics/{topicId}": {
+      "schema": "StudyTopic",
+      "description": "Candidate syllabus topic status and notes"
+    },
+    "/users/{userId}/answers/{answerId}": {
+      "schema": "UserAnswerRecord",
+      "description": "Question resolution history"
+    },
+    "/users/{userId}/simulados/{simuladoId}": {
+      "schema": "SimuladoSession",
+      "description": "Simulado test session results"
+    },
+    "/users/{userId}/materials/{materialId}": {
+      "schema": "object",
+      "description": "Generated or saved PDF summaries"
+    },
+    "/users/{userId}/achievements/{achievementId}": {
+      "schema": "object",
+      "description": "Candidate achievements"
+    },
+    "/users/{userId}/missions/{missionId}": {
+      "schema": "object",
+      "description": "Daily missions progress"
+    },
+    "/questions/{questionId}": {
+      "schema": "Question",
+      "description": "Questions bank repository"
+    }
+  }
+}

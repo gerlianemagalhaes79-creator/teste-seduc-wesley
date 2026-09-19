@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@layer base {
+  @media print {
+    /* Reset background and text colors for high-contrast crisp printing */
+    html, body {
+      background: #ffffff !important;
+      color: #000000 !important;
+      font-size: 11pt !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    /* Hide elements that shouldn't appear in printouts */
+    .print\:hidden,
+    header,
+    nav,
+    aside,
+    footer:not(.printable-footer),
+    button:not(.printable-button) {
+      display: none !important;
+    }
+
+    /* Ensure printable containers take full width and expand all scroll areas */
+    .print\:block {
+      display: block !important;
+    }
+
+    .print\:p-0 {
+      padding: 0 !important;
+    }
+
+    .print\:overflow-visible {
+      overflow: visible !important;
+    }
+
+    .print\:space-y-4 > :not([hidden]) ~ :not([hidden]) {
+      margin-top: 1rem !important;
+    }
+
+    /* Prevent undesirable page breaks inside study cards and day plans */
+    .print-avoid-break,
+    .day-plan-card,
+    .topic-row {
+      page-break-inside: avoid !important;
+      break-inside: avoid !important;
+    }
+
+    /* Remove fixed heights and modals backdrops in print */
+    .fixed {
+      position: static !important;
+    }
+  }
+}

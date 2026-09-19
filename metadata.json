@@ -1,0 +1,8 @@
+{
+  "name": "Testes Wesley Aprova SEDUC FUNECE",
+  "description": "Plataforma com mentor inteligente, simulados FUNECE e cronogramas personalizados para garantir sua aprovação no concurso SEDUC Ceará.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
